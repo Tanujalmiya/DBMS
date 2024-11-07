@@ -1,5 +1,10 @@
 REM   Script: Session 15
 REM   /
+    CREATE TABLE student (studentId NUMBER(4) PRIMARY KEY, student_name VARCHAR2(40)NOT NULL,
+    Address1 VARCHAR2(300),
+    Gender VARCHAR2(15),
+    Deptno NUMBER(2) REFERENCES
+    Course(Deptno));
 
 CREATE TABLE Course ( 
     DeptNo NUMBER(2) PRIMARY KEY, 
