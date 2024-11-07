@@ -1,63 +1,108 @@
-REM   Script: Session 001
-REM   sql
+REM   Script: Session 15
+REM   /
 
-create table emp(  
-    empno number,  
-    empname varchar2(10),  
-    job varchar2(10),  
-    managerno number,  
-    salary number  
+CREATE TABLE Course ( 
+    DeptNo NUMBER(2) PRIMARY KEY, 
+    Dname VARCHAR2(20), 
+    Location VARCHAR2(10) 
 );
 
-alter table emp  
-add comission number;
+INSERT INTO Course VALUES (1, 'MCA', 'Building A');
 
-drop table emp;
+INSERT INTO Course VALUES (2, 'BCA', 'Building B');
 
-create table emp( 
-    empno number, 
-    empname varchar2(10), 
-    job varchar2(10), 
-    managerno number, 
-    salary number 
-);
+INSERT INTO Course VALUES (3, 'BBA', 'Building C');
 
-alter table emp 
-add comission number;
+INSERT INTO Course VALUES (4, 'MBA', 'Building D');
 
- insert into emp(empno,empname,job,managerno,salary,comission)VALUES 
-(1,'aliya','doctor',5,300,1200);
+INSERT INTO Course VALUES (5, 'Engineering', 'Building E');
 
- insert into emp(empno,empname,job,managerno,salary,comission)VALUES 
-(2,'harshita','engineer',5,400,1300);
+CREATE TABLE Student ( 
+    StudentId NUMBER(4) PRIMARY KEY, 
+    Student_name VARCHAR2(40) NOT NULL, 
+    Address1 VARCHAR2(300), 
+    Gender VARCHAR2(15), 
+    Course VARCHAR2(8), 
+    Deptno NUMBER(2) REFERENCES Course(DeptNo));
 
- insert into emp(empno,empname,job,managerno,salary,comission)VALUES 
-(4,'alex','engineer',5,600,1000);
+desc student
 
- insert into emp(empno,empname,job,managerno,salary,comission)VALUES 
-(5,'anmol','archeology',5,1700,800);
 
- insert into emp(empno,empname,job,managerno,salary,comission)VALUES 
-(3,'jonah','architect',5,1700,800);
+INSERT INTO Student VALUES (7369, 'John Doe', '123 Street', 'Male', 'MCA', 1);
 
-select * from emp;
+INSERT INTO Student VALUES (7777, 'Jane Smith', '456 Avenue', 'Female', 'BCA', 2);
 
-select * from emp;
+INSERT INTO Student VALUES (2233, 'Sam Brown', '789 Boulevard', 'Male', 'MBA', 4);
 
-select * from emp;
+INSERT INTO Student VALUES (3322, 'Sue Davis', '101 Road', 'Female', 'BBA', 3);
 
-update emp set empno=3 
-where empname='alex';
+INSERT INTO Student VALUES (3344, 'Alice White', '202 Street', 'Female', 'BCA', 2);
 
-select * from emp;
+CREATE TABLE Course1( 
+    DeptNo NUMBER(2) PRIMARY KEY, 
+    Dname VARCHAR2(20), 
+    Location VARCHAR2(10));
 
-update emp set empno=4 
-where empname='anmol';
+desc course1
 
-select * from emp;
 
-update emp set empno=5 
-where empname='jonah';
+INSERT INTO Course1 VALUES (1, 'MCA', 'Building A');
 
-select * from emp;
+INSERT INTO Course1 VALUES (2, 'BCA', 'Building B');
+
+INSERT INTO Course1 VALUES (3, 'BBA', 'Building C');
+
+INSERT INTO Course1 VALUES (4, 'MBA', 'Building D');
+
+INSERT INTO Course1 VALUES (5, 'Engineering', 'Building E');
+
+select*from student;
+
+select studentid, course from student;
+
+select Dname as course_name, location from course1;
+
+select Dname as course_name, location from course1;
+
+select*from student where course = 'MCA';
+
+select student_name from student where studentid in (7369, 7777, 2233);
+
+select student_name from student where deptno not in (10, 40);
+
+select student_name from student where student_name like 's%';
+
+select student_name from student where student_name like 'S%';
+
+select student_name from student where student_name like 'K%';
+
+select student_name from student where student_name like '_K%';
+
+select student_name from student where student_name like '_k%';
+
+select student_name from student where student_name like '_a%';
+
+select*from student where deptno is null;
+
+select*from student where Deptno is null;
+
+select*from student where Deptno is NULL;
+
+select * from student ORDER BY course ASC;
+
+select count(*) as BCA_student_count from student where course = 'BCA';
+
+select count(*) as Total_student_count FROM student;
+
+select distinct student_name from student where Deptno in (1, 2);
+
+select student_name from student order by course;
+
+select student_name from student order by course;
+
+select student_name from student order by student_name;
+
+select student_name from student order by student_name ASC;
+
+select student_name from student order by student_name ASC;
 
