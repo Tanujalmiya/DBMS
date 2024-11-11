@@ -1,0 +1,51 @@
+CREATE TABLE CUSTOMER (
+    CustID INT PRIMARY KEY,
+    Last_Name VARCHAR(50),
+    First_Name VARCHAR(50)
+);
+
+CREATE TABLE ORDERS (
+    Order_ID INT PRIMARY KEY,
+    Order_Date DATE,
+    Customer_SID INT,
+    Amount DECIMAL(10, 2) CHECK (Amount > 20000),
+    FOREIGN KEY (Customer_SID) REFERENCES CUSTOMER(CustID)
+);
+
+-- Insert records into CUSTOMER table
+INSERT INTO CUSTOMER (CustID, Last_Name, First_Name) VALUES (1, 'Smith', 'John');
+INSERT INTO CUSTOMER (CustID, Last_Name, First_Name) VALUES (2, 'Jones', 'Emma');
+INSERT INTO CUSTOMER (CustID, Last_Name, First_Name) VALUES (3, 'Williams', 'Michael');
+INSERT INTO CUSTOMER (CustID, Last_Name, First_Name) VALUES (4, 'Brown', 'Sarah');
+INSERT INTO CUSTOMER (CustID, Last_Name, First_Name) VALUES (5, 'Davis', 'James');
+
+-- Insert records into ORDERS table
+INSERT INTO ORDERS (Order_ID, Order_Date, Customer_SID, Amount) VALUES (101, '2023-01-15', 1, 25000);
+INSERT INTO ORDERS (Order_ID, Order_Date, Customer_SID, Amount) VALUES (102, '2023-02-20', 2, 18000);
+INSERT INTO ORDERS (Order_ID, Order_Date, Customer_SID, Amount) VALUES (103, '2023-03-10', 3, 22000);
+INSERT INTO ORDERS (Order_ID, Order_Date, Customer_SID, Amount) VALUES (104, '2023-04-25', 4, 31000);
+INSERT INTO ORDERS (Order_ID, Order_Date, Customer_SID, Amount) VALUES (105, '2023-05-05', 5, 27000);
+
+SELECT CUSTOMER.CustID, CUSTOMER.Last_Name, CUSTOMER.First_Name, ORDERS.Amount
+FROM CUSTOMER
+JOIN ORDERS ON CUSTOMER.CustID = ORDERS.Customer_SID;
+
+SELECT * FROM CUSTOMER
+WHERE Last_Name LIKE '%s';
+
+SELECT * FROM ORDERS
+WHERE Amount BETWEEN 21000 AND 30000;
+
+UPDATE ORDERS
+SET Amount = Amount + 500
+WHERE Amount > 0;
+
+SELECT Order_ID, Amount FROM ORDERS;
+
+SELECT SUM(Amount) AS Total_Amount
+FROM ORDERS
+WHERE Amount > 15000;
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON CUSTOMER TO user;
+
+REVOKE SELECT, INSERT, UPDATE, DELETE ON CUSTOMER FROM user;
