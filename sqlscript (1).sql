@@ -1,4 +1,4 @@
-REM   Script: Session 15
+REM   Script: practical question1
 REM   /
     CREATE TABLE student (studentId NUMBER(4) PRIMARY KEY, student_name VARCHAR2(40)NOT NULL,
     Address1 VARCHAR2(300),
